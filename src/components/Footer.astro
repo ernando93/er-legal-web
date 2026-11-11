@@ -1,0 +1,38 @@
+---
+import Logo from './Logo.astro';
+import { nav, site } from '../data/site';
+import { layanan } from '../data/layanan';
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <Logo light />
+      <p>{site.entity}. Berkantor di Jakarta Selatan, menangani perkara di seluruh Indonesia.</p>
+    </div>
+    <div>
+      <h2>Layanan</h2>
+      <ul>{layanan.map((l) => <li><a href={`/layanan/${l.slug}`}>{l.title}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2>Halaman</h2>
+      <ul>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        <li><a href="/kontak">Kontak</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Kantor</h2>
+      <address>{site.address.map((a) => <span>{a}</span>)}</address>
+      <p><a href={site.phoneHref}>{site.phoneDisplay}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p>Informasi di website ini bersifat umum dan bukan nasihat hukum. Hubungan advokat dan klien baru terbentuk melalui perjanjian tertulis.</p>
+    <p class="footer-links">
+      <a href="/disclaimer">Disclaimer</a>
+      <a href="/kebijakan-privasi">Kebijakan Privasi</a>
+      <span>© {new Date().getFullYear()} {site.name}</span>
+    </p>
+    <p class="footer-demo">Versi demo. Nama, alamat, nomor kontak, dan profil tim masih contoh.</p>
+  </div>
+</footer>

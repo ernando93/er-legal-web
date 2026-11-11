@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Portrait from '../components/Portrait.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import { site, tanggal } from '../data/site';
+import { layanan } from '../data/layanan';
+import { tim } from '../data/tim';
+import rapat from '../assets/photos/rapat.jpg';
+import tandaTangan from '../assets/photos/tanda-tangan.jpg';
+import buku from '../assets/photos/buku.jpg';
+
+const artikel = (await getCollection('artikel')).sort((a, b) => +b.data.date - +a.data.date);
+const [utama, ...lain] = artikel;
+const [pendiri, ...anggota] = tim;
+---
+<Base>
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <h1>Sebelum melangkah secara hukum, Anda perlu tahu posisi Anda.</h1>
+      <p class="lede">ER Legal adalah kantor advokat di Jakarta untuk pelaku usaha dan keluarga. Kami membaca dokumen Anda, menjelaskan risikonya, lalu menyusun langkah berikutnya bersama Anda.</p>
+      <div class="hero-act">
+        <a class="btn" href="/kontak">Jadwalkan konsultasi</a>
+        <a class="tlink" href={site.whatsappHref}>Chat lewat WhatsApp</a>
+      </div>
+    </div>
+    <figure class="hero-photo">
+      <Image src={rapat} alt="Beberapa orang berdiskusi sambil mencatat di meja kayu" widths={[480, 800, 1200]} sizes="(max-width: 880px) 100vw, 42vw" loading="eager" fetchpriority="high" />
+    </figure>
+  </div>
+  <div class="facts">
+    <div class="wrap">
+      <ul>
+        <li><Icon name="map-pin" />Jakarta Selatan</li>
+        <li><Icon name="clock" />Senin sampai Jumat, 09.00 sampai 18.00</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="wrap split s-services">
+    <div class="split-head">
+      <h2>Bidang yang kami tangani</h2>
+      <p>Kalau masalah Anda tidak ada di daftar ini, tanyakan saja. Bila bukan keahlian kami, kami akan bilang.</p>
+      <a class="tlink" href="/layanan">Lihat semua layanan</a>
+    </div>
+    <ol class="index">
+      {layanan.map((l) => (
+        <li>
+          <a href={`/layanan/${l.slug}`}>
+            <h3>{l.title}</h3>
+            <p>{l.short}</p>
+            <Icon name="arrow-right" size={22} />
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="process">
+    <div class="wrap">
+      <h2>Tidak perlu mengerti istilah hukum untuk mulai bicara dengan kami.</h2>
+      <ol class="steps">
+        <li>
+          <span class="when">Pertemuan pertama</span>
+          <h3>Anda bercerita</h3>
+          <p>Secara tatap muka atau daring. Bawa dokumen yang ada, walau belum rapi. Kami yang akan menyusun kronologinya.</p>
+        </li>
+        <li>
+          <span class="when">Setelah dokumen dibaca</span>
+          <h3>Anda menerima peta</h3>
+          <p>Posisi hukum Anda, pilihan langkah, perkiraan waktu, dan biayanya, secara tertulis.</p>
+        </li>
+        <li>
+          <span class="when">Selama ditangani</span>
+          <h3>Anda tetap tahu</h3>
+          <p>Satu advokat sebagai kontak utama, dengan kabar berkala tentang perkembangan terakhir.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="stance">
+    <Image src={tandaTangan} alt="Tangan menandatangani dokumen dengan pena" widths={[600, 1000, 1400]} sizes="(max-width: 880px) 100vw, 50vw" />
+    <div class="stance-copy">
+      <blockquote>Kami tidak menjanjikan hasil perkara. Tidak ada advokat yang boleh melakukannya.</blockquote>
+      <p>Yang bisa kami pastikan adalah cara kerjanya: penilaian yang jujur, biaya yang disepakati di awal, dan kerahasiaan yang dijaga.</p>
+      <a class="tlink" href="/tentang">Cara kami bekerja</a>
+    </div>
+  </section>
+
+  <section class="wrap s-team">
+    <div class="team-head">
+      <h2>Orang yang akan Anda temui</h2>
+      <a class="tlink" href="/tim">Seluruh tim</a>
+    </div>
+    <div class="team-feature">
+      <a href={`/tim/${pendiri.slug}`}><Portrait inisial={pendiri.inisial} warna={pendiri.warna} /></a>
+      <div>
+        <a href={`/tim/${pendiri.slug}`}><h3>{pendiri.nama}, {pendiri.gelar}</h3></a>
+        <p class="team-role">{pendiri.jabatan}</p>
+        <p class="lede">{pendiri.ringkas}</p>
+        <ul class="team-list">
+          {anggota.map((a) => (
+            <li><a href={`/tim/${a.slug}`}><strong>{a.nama}</strong><span>{a.jabatan}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-articles">
+    <div class="wrap">
+      <h2>Bacaan singkat</h2>
+      <div class="articles-grid">
+        <a class="a-feature" href={`/artikel/${utama.id}`}>
+          <Image src={buku} alt="Tumpukan buku dan pena di atas meja" widths={[600, 1000]} sizes="(max-width: 880px) 100vw, 55vw" />
+          <p class="a-meta">{utama.data.category}, {tanggal(utama.data.date)}</p>
+          <h3>{utama.data.title}</h3>
+          <p class="muted">{utama.data.excerpt}</p>
+        </a>
+        <ul class="a-row">
+          {lain.map((a) => (
+            <li>
+              <a href={`/artikel/${a.id}`}>
+                <p class="a-meta">{a.data.category}, {tanggal(a.data.date)}</p>
+                <h3>{a.data.title}</h3>
+              </a>
+            </li>
+          ))}
+          <li><a class="tlink" href="/artikel">Semua artikel</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <ClosingCta />
+</Base>

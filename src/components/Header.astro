@@ -1,0 +1,37 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { nav, site } from '../data/site';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/';
+const aktif = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<header class="site-header">
+  <div class="wrap site-header-in">
+    <Logo />
+    <nav class="nav" id="nav-utama" aria-label="Navigasi utama">
+      {nav.map((n) => (
+        <a href={n.href} aria-current={aktif(n.href) ? 'page' : undefined}>{n.label}</a>
+      ))}
+      <a class="nav-cta" href="/kontak" aria-current={aktif('/kontak') ? 'page' : undefined}>Kontak</a>
+    </nav>
+    <div class="header-mobile">
+      <a class="icon-btn" href={site.whatsappHref} aria-label="Chat WhatsApp"><Icon name="whatsapp-logo" size={24} /></a>
+      <button class="icon-btn" id="tombol-menu" type="button" aria-expanded="false" aria-controls="nav-utama" aria-label="Buka menu">
+        <span class="when-closed"><Icon name="list" size={24} /></span>
+        <span class="when-open"><Icon name="x" size={24} /></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('tombol-menu');
+  const nav = document.getElementById('nav-utama');
+  btn?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open') ?? false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+  });
+</script>

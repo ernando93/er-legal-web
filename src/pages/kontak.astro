@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import jakarta from '../assets/photos/jakarta.jpg';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { layanan } from '../data/layanan';
+---
+<Base title="Kontak" description="Hubungi ER Legal untuk menjadwalkan konsultasi.">
+  <div class="page-head">
+    <div class="wrap page-head-in">
+      <h1>Ceritakan apa yang terjadi.</h1>
+      <p class="lede">Tidak perlu lengkap dan tidak perlu pakai istilah hukum. Tim kami akan menghubungi Anda untuk menjadwalkan pertemuan.</p>
+    </div>
+  </div>
+
+  <div class="wrap contact">
+    <form id="form-kontak">
+      <div class="field-row">
+        <div class="field">
+          <label for="nama">Nama</label>
+          <input id="nama" name="nama" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="hp">Nomor WhatsApp</label>
+          <input id="hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email (boleh dikosongkan)</label>
+        <input id="email" name="email" type="email" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="bidang">Bidang</label>
+        <select id="bidang" name="bidang">
+          <option>Belum tahu</option>
+          {layanan.map((l) => <option>{l.title}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for="pesan">Ringkasan masalah</label>
+        <textarea id="pesan" name="pesan" required></textarea>
+      </div>
+      <div class="consent">
+        <input id="setuju" type="checkbox" required />
+        <label for="setuju">Saya setuju data ini digunakan untuk menanggapi permintaan saya, sesuai <a href="/kebijakan-privasi">Kebijakan Privasi</a>. Mengirim formulir ini belum menimbulkan hubungan advokat dan klien.</label>
+      </div>
+      <button class="btn" type="submit">Kirim</button>
+      <p class="form-status" id="status" role="status" hidden>Ini versi demo, jadi pesan Anda tidak dikirim atau disimpan.</p>
+    </form>
+
+    <div class="contact-side">
+      <ul class="c-list">
+        <li><Icon name="whatsapp-logo" size={22} /><div><span class="lab">WhatsApp</span><a href={site.whatsappHref}>{site.whatsappDisplay}</a></div></li>
+        <li><Icon name="phone" size={22} /><div><span class="lab">Telepon</span><a href={site.phoneHref}>{site.phoneDisplay}</a></div></li>
+        <li><Icon name="envelope-simple" size={22} /><div><span class="lab">Email</span><a href={`mailto:${site.email}`}>{site.email}</a></div></li>
+        <li><Icon name="map-pin" size={22} /><div><span class="lab">Kantor</span>{site.address.join(', ')}</div></li>
+        <li><Icon name="clock" size={22} /><div><span class="lab">Jam kerja</span>{site.hours}</div></li>
+      </ul>
+      <p>Bila ada tenggat dalam waktu dekat, seperti panggilan sidang atau batas waktu somasi, sebutkan di awal pesan Anda.</p>
+    </div>
+  </div>
+
+  <div class="map">
+    <Image src={jakarta} alt="Bundaran Hotel Indonesia di Jakarta" widths={[800, 1400, 1800]} sizes="100vw" />
+    <a class="btn map-link" href={site.mapLink} target="_blank" rel="noopener">Buka di Google Maps</a>
+  </div>
+</Base>
+
+<script>
+  const form = document.getElementById('form-kontak') as HTMLFormElement | null;
+  const status = document.getElementById('status');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (status) status.hidden = false;
+    form.reset();
+  });
+</script>

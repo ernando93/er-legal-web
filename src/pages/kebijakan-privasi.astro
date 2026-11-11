@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Kebijakan Privasi">
+  <div class="page-head"><div class="wrap"><h1>Kebijakan Privasi</h1></div></div>
+  <div class="wrap doc">
+    <p class="notice">Draf contoh untuk demo. Teks ini harus ditinjau dan disesuaikan oleh advokat dengan Undang-Undang Nomor 27 Tahun 2022 sebelum website live.</p>
+    <h2>Data yang kami terima</h2>
+    <p>Nama, nomor WhatsApp, email, dan ringkasan masalah yang Anda isi di formulir kontak.</p>
+    <h2>Tujuan penggunaan</h2>
+    <p>Data digunakan untuk menanggapi permintaan Anda dan menjadwalkan konsultasi. Kami tidak menjual data Anda.</p>
+    <h2>Penyimpanan dan keamanan</h2>
+    <p>Data disimpan selama diperlukan untuk tujuan tersebut atau sesuai kewajiban hukum yang berlaku.</p>
+    <h2>Hak Anda</h2>
+    <p>Anda dapat meminta akses, perbaikan, atau penghapusan data, serta menarik persetujuan, dengan menghubungi <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  </div>
+</Base>

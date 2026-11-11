@@ -1,0 +1,13 @@
+---
+import { site } from '../data/site';
+const { judul = 'Ceritakan dulu masalahnya. Soal langkah, kita pikirkan bersama.' } = Astro.props;
+---
+<section class="closing">
+  <div class="wrap closing-in">
+    <h2>{judul}</h2>
+    <div class="closing-act">
+      <a class="btn" href="/kontak">Jadwalkan konsultasi</a>
+      <a class="tlink" href={site.whatsappHref}>Atau chat WhatsApp</a>
+    </div>
+  </div>
+</section>

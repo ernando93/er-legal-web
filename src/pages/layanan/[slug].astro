@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import { layanan, type Layanan } from '../../data/layanan';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return layanan.map((l) => ({ params: { slug: l.slug }, props: { l } }));
+}
+const { l } = Astro.props as { l: Layanan };
+---
+<Base title={l.title} description={l.short}>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="crumb"><a href="/layanan">Layanan</a></p>
+      <div class="page-head-in">
+        <h1>{l.title}</h1>
+        <p class="lede">{l.short}</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap detail">
+    <div>
+      {l.intro.map((p, i) => <p class={i === 0 ? 'lede' : ''}>{p}</p>)}
+      <h2>Yang kami kerjakan</h2>
+      <ul class="check">{l.cakupan.map((c) => <li>{c}</li>)}</ul>
+      <h2>Pertanyaan yang sering muncul</h2>
+      {l.faq.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <aside class="aside">
+      <h2>Bicarakan kasus Anda</h2>
+      <p class="muted">Siapkan dokumen yang ada. Kami sampaikan perkiraan biaya sebelum pekerjaan dimulai.</p>
+      <a class="btn" href="/kontak">Jadwalkan konsultasi</a>
+      <a class="tlink" href={site.whatsappHref}>Chat lewat WhatsApp</a>
+    </aside>
+  </div>
+</Base>

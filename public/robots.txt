@@ -1,0 +1,3 @@
+# Versi demo. Hapus aturan ini saat website live.
+User-agent: *
+Disallow: /

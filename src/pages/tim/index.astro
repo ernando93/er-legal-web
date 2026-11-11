@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import Portrait from '../../components/Portrait.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
+import { tim } from '../../data/tim';
+---
+<Base title="Tim" description="Advokat ER Legal.">
+  <div class="page-head">
+    <div class="wrap page-head-in">
+      <h1>Tim</h1>
+      <p class="lede">Advokat yang Anda temui di pertemuan pertama adalah yang mengerjakan perkara Anda. Nama dan profil di halaman ini masih contoh.</p>
+    </div>
+  </div>
+  <div class="wrap people">
+    {tim.map((a) => (
+      <a class="person" href={`/tim/${a.slug}`}>
+        <Portrait inisial={a.inisial} warna={a.warna} />
+        <h2>{a.nama}</h2>
+        <p class="person-role">{a.jabatan}</p>
+        <p>{a.ringkas}</p>
+      </a>
+    ))}
+  </div>
+  <ClosingCta />
+</Base>

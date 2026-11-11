@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Portrait from '../../components/Portrait.astro';
+import { tim, type Anggota } from '../../data/tim';
+
+export function getStaticPaths() {
+  return tim.map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props as { a: Anggota };
+---
+<Base title={a.nama} description={`${a.nama}, ${a.jabatan} di ER Legal.`}>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="crumb"><a href="/tim">Tim</a></p>
+      <h1>{a.nama}</h1>
+      <p class="lede muted" style="margin-top:.75rem">{a.gelar} · {a.jabatan}</p>
+    </div>
+  </div>
+  <div class="wrap profile">
+    <div><Portrait inisial={a.inisial} warna={a.warna} /></div>
+    <div class="profile-body">
+      {a.bio.map((p, i) => <p class={i === 0 ? 'lede' : ''}>{p}</p>)}
+      <h2>Bidang utama</h2>
+      <ul class="check">{a.fokus.map((f) => <li>{f}</li>)}</ul>
+      <h2>Pendidikan</h2>
+      <ul class="check">{a.pendidikan.map((p) => <li>{p}</li>)}</ul>
+      <p style="margin-top:2.5rem"><a class="btn" href="/kontak">Jadwalkan konsultasi</a></p>
+    </div>
+  </div>
+</Base>

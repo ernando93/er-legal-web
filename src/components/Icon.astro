@@ -1,0 +1,8 @@
+---
+const icons = import.meta.glob('../icons/*.svg', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const { name, size = 20 } = Astro.props;
+const raw = icons[`../icons/${name}.svg`];
+if (!raw) throw new Error(`Icon tidak ditemukan: ${name}`);
+const svg = raw.replace('<svg ', `<svg width="${size}" height="${size}" aria-hidden="true" `);
+---
+<span class="icon" set:html={svg} />

@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { tanggal } from '../../data/site';
+
+const artikel = (await getCollection('artikel')).sort((a, b) => +b.data.date - +a.data.date);
+---
+<Base title="Artikel" description="Panduan hukum singkat dari ER Legal.">
+  <div class="page-head">
+    <div class="wrap page-head-in">
+      <h1>Artikel</h1>
+      <p class="lede">Panduan singkat untuk pertanyaan yang paling sering kami dengar.</p>
+    </div>
+  </div>
+  <ul class="wrap a-list">
+    {artikel.map((a) => (
+      <li>
+        <a href={`/artikel/${a.id}`}>
+          <span class="muted">{tanggal(a.data.date)}</span>
+          <div>
+            <h2>{a.data.title}</h2>
+            <p>{a.data.excerpt}</p>
+          </div>
+          <span class="a-cat">{a.data.category}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>
