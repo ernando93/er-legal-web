@@ -7,7 +7,7 @@ import { layanan } from '../data/layanan';
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <Logo light />
-      <p>{site.entity}. Berkantor di Jakarta Selatan, menangani perkara di seluruh Indonesia.</p>
+      <p>Platform layanan hukum yang dikelola {site.entity}. {site.tagline}.</p>
     </div>
     <div>
       <h2>Layanan</h2>
@@ -23,16 +23,16 @@ import { layanan } from '../data/layanan';
     <div>
       <h2>Kantor</h2>
       <address>{site.address.map((a) => <span>{a}</span>)}</address>
-      <p><a href={site.phoneHref}>{site.phoneDisplay}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p><a href={site.whatsappHref}>WhatsApp {site.whatsappDisplay}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
     </div>
   </div>
   <div class="wrap footer-legal">
-    <p>Informasi di website ini bersifat umum dan bukan nasihat hukum. Hubungan advokat dan klien baru terbentuk melalui perjanjian tertulis.</p>
+    <p>Informasi di website ini bersifat umum dan bukan nasihat hukum untuk keadaan tertentu.</p>
     <p class="footer-links">
       <a href="/disclaimer">Disclaimer</a>
       <a href="/kebijakan-privasi">Kebijakan Privasi</a>
-      <span>© {new Date().getFullYear()} {site.name}</span>
+      <span>© {new Date().getFullYear()} {site.entity}</span>
     </p>
-    <p class="footer-demo">Versi demo. Nama, alamat, nomor kontak, dan profil tim masih contoh.</p>
+    <p class="footer-demo">Versi demo. Nomor WhatsApp, email, profil tim, dan artikel masih contoh.</p>
   </div>
 </footer>

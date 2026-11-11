@@ -4,11 +4,11 @@ import Icon from '../../components/Icon.astro';
 import ClosingCta from '../../components/ClosingCta.astro';
 import { layanan } from '../../data/layanan';
 ---
-<Base title="Layanan" description="Bidang layanan hukum ER Legal untuk pelaku usaha dan keluarga.">
+<Base title="Layanan" description="Edukasi hukum, konsultasi hukum, dan informasi hukum dari LawOn.id.">
   <div class="page-head">
     <div class="wrap page-head-in">
       <h1>Layanan</h1>
-      <p class="lede">Enam bidang yang kami kerjakan setiap hari. Pilih yang paling dekat dengan persoalan Anda.</p>
+      <p class="lede">Edukasi, konsultasi, dan informasi hukum. Pilih yang paling dekat dengan kebutuhan Anda.</p>
     </div>
   </div>
   <section class="wrap svc-table">
@@ -16,7 +16,7 @@ import { layanan } from '../../data/layanan';
       {layanan.map((l) => (
         <li>
           <a href={`/layanan/${l.slug}`}>
-            <h2 class="index-title" style="font-size:clamp(1.5rem,1.25rem + 1.1vw,2.2rem)">{l.title}</h2>
+            <h2 class="index-title">{l.title}</h2>
             <p>{l.short}<span class="index-meta">{l.untuk}</span></p>
             <Icon name="arrow-right" size={22} />
           </a>
@@ -24,5 +24,5 @@ import { layanan } from '../../data/layanan';
       ))}
     </ol>
   </section>
-  <ClosingCta judul="Belum yakin masuk bidang yang mana? Itu pertanyaan yang wajar." />
+  <ClosingCta judul="Belum yakin layanan mana yang Anda butuhkan? Tanyakan saja." />
 </Base>

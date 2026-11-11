@@ -1,8 +1,8 @@
 ---
-// Pengganti foto advokat. Saat foto asli tersedia, ganti panel ini dengan <Image />.
+// Pengganti foto anggota tim. Saat foto asli tersedia, ganti panel ini dengan <Image />.
 const { inisial, warna } = Astro.props;
 ---
-<div class={`portrait portrait--${warna}`} role="img" aria-label="Foto advokat menyusul">
+<div class={`portrait portrait--${warna}`} role="img" aria-label="Foto menyusul">
   <span class="portrait-init">{inisial}</span>
   <span class="portrait-note">Foto menyusul</span>
 </div>

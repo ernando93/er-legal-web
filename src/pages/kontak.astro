@@ -6,11 +6,11 @@ import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 import { layanan } from '../data/layanan';
 ---
-<Base title="Kontak" description="Hubungi ER Legal untuk menjadwalkan konsultasi.">
+<Base title="Kontak" description="Hubungi LawOn.id untuk edukasi, konsultasi, atau informasi hukum.">
   <div class="page-head">
     <div class="wrap page-head-in">
-      <h1>Ceritakan apa yang terjadi.</h1>
-      <p class="lede">Tidak perlu lengkap dan tidak perlu pakai istilah hukum. Tim kami akan menghubungi Anda untuk menjadwalkan pertemuan.</p>
+      <h1>Ceritakan kebutuhan Anda.</h1>
+      <p class="lede">Ingin konsultasi, ikut kelas, atau mencari referensi hukum? Isi formulir ini dan tim kami akan menghubungi Anda.</p>
     </div>
   </div>
 
@@ -31,19 +31,23 @@ import { layanan } from '../data/layanan';
         <input id="email" name="email" type="email" autocomplete="email" />
       </div>
       <div class="field">
-        <label for="bidang">Bidang</label>
+        <label for="bidang">Layanan</label>
         <select id="bidang" name="bidang">
           <option>Belum tahu</option>
-          {layanan.map((l) => <option>{l.title}</option>)}
+          {layanan.map((l) => (
+            <optgroup label={l.title}>
+              {l.item.map((it) => <option>{it.nama}</option>)}
+            </optgroup>
+          ))}
         </select>
       </div>
       <div class="field">
-        <label for="pesan">Ringkasan masalah</label>
+        <label for="pesan">Pesan</label>
         <textarea id="pesan" name="pesan" required></textarea>
       </div>
       <div class="consent">
         <input id="setuju" type="checkbox" required />
-        <label for="setuju">Saya setuju data ini digunakan untuk menanggapi permintaan saya, sesuai <a href="/kebijakan-privasi">Kebijakan Privasi</a>. Mengirim formulir ini belum menimbulkan hubungan advokat dan klien.</label>
+        <label for="setuju">Saya setuju data ini digunakan untuk menanggapi permintaan saya, sesuai <a href="/kebijakan-privasi">Kebijakan Privasi</a>. Mengirim formulir ini belum merupakan perjanjian layanan.</label>
       </div>
       <button class="btn" type="submit">Kirim</button>
       <p class="form-status" id="status" role="status" hidden>Ini versi demo, jadi pesan Anda tidak dikirim atau disimpan.</p>
@@ -52,12 +56,10 @@ import { layanan } from '../data/layanan';
     <div class="contact-side">
       <ul class="c-list">
         <li><Icon name="whatsapp-logo" size={22} /><div><span class="lab">WhatsApp</span><a href={site.whatsappHref}>{site.whatsappDisplay}</a></div></li>
-        <li><Icon name="phone" size={22} /><div><span class="lab">Telepon</span><a href={site.phoneHref}>{site.phoneDisplay}</a></div></li>
         <li><Icon name="envelope-simple" size={22} /><div><span class="lab">Email</span><a href={`mailto:${site.email}`}>{site.email}</a></div></li>
-        <li><Icon name="map-pin" size={22} /><div><span class="lab">Kantor</span>{site.address.join(', ')}</div></li>
-        <li><Icon name="clock" size={22} /><div><span class="lab">Jam kerja</span>{site.hours}</div></li>
+        <li><Icon name="map-pin" size={22} /><div><span class="lab">Alamat</span>{site.address.join(', ')}</div></li>
       </ul>
-      <p>Bila ada tenggat dalam waktu dekat, seperti panggilan sidang atau batas waktu somasi, sebutkan di awal pesan Anda.</p>
+      <p>Untuk konsultasi, sertakan ringkasan persoalan dan dokumen yang Anda miliki. Bila ada tenggat waktu dalam waktu dekat, sebutkan di awal pesan.</p>
     </div>
   </div>
 

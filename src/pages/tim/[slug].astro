@@ -8,7 +8,7 @@ export function getStaticPaths() {
 }
 const { a } = Astro.props as { a: Anggota };
 ---
-<Base title={a.nama} description={`${a.nama}, ${a.jabatan} di ER Legal.`}>
+<Base title={a.nama} description={`${a.nama}, ${a.jabatan} di LawOn.id.`}>
   <div class="page-head">
     <div class="wrap">
       <p class="crumb"><a href="/tim">Tim</a></p>
@@ -20,11 +20,11 @@ const { a } = Astro.props as { a: Anggota };
     <div><Portrait inisial={a.inisial} warna={a.warna} /></div>
     <div class="profile-body">
       {a.bio.map((p, i) => <p class={i === 0 ? 'lede' : ''}>{p}</p>)}
-      <h2>Bidang utama</h2>
+      <h2>Fokus</h2>
       <ul class="check">{a.fokus.map((f) => <li>{f}</li>)}</ul>
       <h2>Pendidikan</h2>
       <ul class="check">{a.pendidikan.map((p) => <li>{p}</li>)}</ul>
-      <p style="margin-top:2.5rem"><a class="btn" href="/kontak">Jadwalkan konsultasi</a></p>
+      <p style="margin-top:2.5rem"><a class="btn" href="/kontak">Hubungi kami</a></p>
     </div>
   </div>
 </Base>

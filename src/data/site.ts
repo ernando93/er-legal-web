@@ -1,17 +1,22 @@
-// Data kantor. Ganti di sini, semua halaman ikut berubah.
+// Data perusahaan. Ganti di sini, semua halaman ikut berubah.
+// Sumber: Company Profile LawOn.id. Nomor WhatsApp dan email belum diberikan client, jadi masih contoh.
 export const site = {
-  name: 'ER Legal',
-  entity: 'Kantor Advokat ER Legal',
-  phoneDisplay: '(021) 0000 0000',
-  phoneHref: 'tel:+622100000000',
+  name: 'LawOn.id',
+  entity: 'PT Solusi Aksara Hukum',
+  tagline: 'Lebih Mudah Bersama LawOn.id',
   whatsappDisplay: '0800 0000 0000',
   whatsappHref:
     'https://wa.me/6280000000000?text=' +
-    encodeURIComponent('Halo ER Legal, saya ingin menjadwalkan konsultasi.'),
-  email: 'halo@erlegal.example',
-  address: ['Gedung Contoh, Lantai 12', 'Jl. Contoh Raya No. 1', 'Jakarta Selatan 12000'],
-  hours: 'Senin sampai Jumat, 09.00 sampai 18.00 WIB',
-  mapLink: 'https://www.google.com/maps/search/?api=1&query=Jakarta%20Selatan',
+    encodeURIComponent('Halo LawOn.id, saya ingin bertanya tentang layanan Anda.'),
+  email: 'halo@lawon.example',
+  address: [
+    'Next Office, Menara Agrinas Palma Lantai 15 Unit 15-03',
+    'Jl. H.R. Rasuna Said Kav. VI No. 9 Blok X2',
+    'Kuningan Timur, Setiabudi, Jakarta Selatan 12950',
+  ],
+  mapLink:
+    'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent('Menara Agrinas Palma, Jl. H.R. Rasuna Said, Jakarta Selatan'),
 };
 
 export const nav = [
@@ -19,7 +24,7 @@ export const nav = [
   { href: '/tentang', label: 'Tentang Kami' },
   { href: '/layanan', label: 'Layanan' },
   { href: '/tim', label: 'Tim' },
-  { href: '/artikel', label: 'Artikel' },
+  { href: '/artikel', label: 'Publikasi' },
 ];
 
 export const tanggal = (d: Date) =>

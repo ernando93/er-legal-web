@@ -7,6 +7,7 @@ export function getStaticPaths() {
   return layanan.map((l) => ({ params: { slug: l.slug }, props: { l } }));
 }
 const { l } = Astro.props as { l: Layanan };
+const lain = layanan.filter((x) => x.slug !== l.slug);
 ---
 <Base title={l.title} description={l.short}>
   <div class="page-head">
@@ -14,27 +15,29 @@ const { l } = Astro.props as { l: Layanan };
       <p class="crumb"><a href="/layanan">Layanan</a></p>
       <div class="page-head-in">
         <h1>{l.title}</h1>
-        <p class="lede">{l.short}</p>
+        <p class="lede">{l.intro[0]}</p>
       </div>
     </div>
   </div>
   <div class="wrap detail">
     <div>
-      {l.intro.map((p, i) => <p class={i === 0 ? 'lede' : ''}>{p}</p>)}
-      <h2>Yang kami kerjakan</h2>
-      <ul class="check">{l.cakupan.map((c) => <li>{c}</li>)}</ul>
-      <h2>Pertanyaan yang sering muncul</h2>
-      {l.faq.map((f) => (
-        <details>
-          <summary>{f.q}</summary>
-          <p>{f.a}</p>
-        </details>
-      ))}
+      <ol class="svc-items">
+        {l.item.map((it) => (
+          <li>
+            <h2>{it.nama}</h2>
+            <p>{it.isi}</p>
+          </li>
+        ))}
+      </ol>
+      <h2 class="svc-other-head">Layanan lainnya</h2>
+      <ul class="check">
+        {lain.map((x) => <li><a class="tlink" href={`/layanan/${x.slug}`}>{x.title}</a></li>)}
+      </ul>
     </div>
     <aside class="aside">
-      <h2>Bicarakan kasus Anda</h2>
-      <p class="muted">Siapkan dokumen yang ada. Kami sampaikan perkiraan biaya sebelum pekerjaan dimulai.</p>
-      <a class="btn" href="/kontak">Jadwalkan konsultasi</a>
+      <h2>Tertarik dengan {l.title.toLowerCase()}?</h2>
+      <p class="muted">Ceritakan kebutuhan Anda. Tim kami akan menghubungi Anda untuk membicarakan langkah selanjutnya.</p>
+      <a class="btn" href="/kontak">Hubungi kami</a>
       <a class="tlink" href={site.whatsappHref}>Chat lewat WhatsApp</a>
     </aside>
   </div>

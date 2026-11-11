@@ -6,18 +6,20 @@ import { site } from '../data/site';
 import ruang from '../assets/photos/ruang-rapat.jpg';
 import jakarta from '../assets/photos/jakarta.jpg';
 
-const pasal = [
-  ['Biaya disepakati sebelum mulai', 'Anda menerima rincian tertulis. Bila ruang lingkup berubah, kami bicarakan dulu sebelum menagih.'],
-  ['Satu orang yang bertanggung jawab', 'Setiap perkara punya satu advokat sebagai kontak utama, yang tahu perkembangan terakhirnya.'],
-  ['Bahasa yang bisa dimengerti', 'Istilah hukum kami jelaskan. Memo kami selalu dimulai dengan ringkasan satu halaman.'],
-  ['Kerahasiaan adalah kewajiban', 'Apa yang Anda sampaikan kepada kami dijaga kerahasiaannya, sesuai kewajiban profesi advokat.'],
+// Sumber: Company Profile LawOn.id.
+const misi = [
+  'Menyelenggarakan edukasi hukum yang berkualitas, aplikatif, dan berkelanjutan.',
+  'Memberikan layanan konsultasi hukum yang profesional, responsif, dan berorientasi pada solusi.',
+  'Menyediakan informasi dan referensi hukum yang aktual, kredibel, dan mudah diakses.',
+  'Mendorong peningkatan kesadaran hukum dan kepatuhan terhadap peraturan perundang-undangan.',
+  'Membangun ekosistem hukum yang kolaboratif dengan melibatkan praktisi, akademisi, profesional, dan masyarakat.',
 ];
 ---
-<Base title="Tentang Kami" description="Profil dan cara kerja Kantor Advokat ER Legal.">
+<Base title="Tentang Kami" description="Profil, visi, dan misi LawOn.id, platform layanan hukum yang dikelola PT Solusi Aksara Hukum.">
   <div class="page-head">
     <div class="wrap page-head-in">
-      <h1>Kantor kecil, dengan kebiasaan menjelaskan.</h1>
-      <p class="lede">ER Legal didirikan untuk satu alasan: klien berhak mengerti urusan hukumnya sendiri.</p>
+      <h1>Layanan hukum yang profesional dan mudah diakses.</h1>
+      <p class="lede">LawOn.id dikembangkan dan dikelola oleh {site.entity}, yang mengintegrasikan edukasi, konsultasi, dan informasi hukum dalam satu wadah.</p>
     </div>
   </div>
 
@@ -26,22 +28,26 @@ const pasal = [
   </div>
 
   <section class="wrap split story">
-    <div class="split-head"><h2>Cerita kami</h2></div>
+    <div class="split-head"><h2>Tentang LawOn.id</h2></div>
     <div class="story-body">
-      <p class="lede">Elvira Rahadian mendirikan kantor ini setelah terlalu sering melihat klien keluar dari rapat dengan memo tebal dan tanpa kejelasan apa yang harus dilakukan besok pagi.</p>
-      <p>Kami sengaja tetap ramping. Advokat yang Anda temui di pertemuan pertama adalah advokat yang mengerjakan perkara Anda. Klien kami kebanyakan pemilik usaha, perusahaan keluarga, dan perorangan yang menghadapi keputusan penting.</p>
-      <p>Bila kami merasa suatu perkara lebih baik ditangani pihak lain, atau lebih baik tidak diteruskan, kami akan mengatakannya.</p>
+      <p class="lede">Kami percaya bahwa setiap pengetahuan membutuhkan proses untuk dipahami, setiap persoalan membutuhkan ketelitian untuk dianalisis, dan setiap solusi membutuhkan pendekatan yang tepat untuk menghasilkan manfaat.</p>
+      <p>Berangkat dari pemikiran tersebut, LawOn.id berkomitmen menghadirkan layanan hukum yang profesional, aplikatif, dan mudah diakses oleh masyarakat, profesional, maupun pelaku usaha.</p>
+      <p>Melalui edukasi hukum, kami menyediakan ruang pembelajaran untuk meningkatkan pengetahuan dan mengembangkan kompetensi di bidang hukum. Melalui konsultasi hukum, kami menghadirkan layanan yang responsif dan solutif. Melalui informasi hukum, kami menyediakan akses terhadap perkembangan regulasi, literatur, dan berbagai wawasan hukum yang relevan.</p>
+      <p>Kami memandang hukum bukan sekadar kumpulan aturan yang harus dipahami, melainkan bidang keilmuan dan instrumen profesional yang membutuhkan penguasaan, ketelitian, serta kemampuan penerapan secara tepat.</p>
     </div>
   </section>
 
   <section class="pasal">
     <div class="wrap">
-      <h2>Empat pasal yang kami pegang</h2>
+      <div class="visi">
+        <span class="pasal-num">Visi</span>
+        <p class="visi-text">Menjadi platform layanan hukum yang profesional, inovatif, dan terpercaya dalam memperluas akses pengetahuan, informasi, serta solusi hukum.</p>
+      </div>
+      <h2>Misi</h2>
       <ol class="pasal-list">
-        {pasal.map(([judul, isi], i) => (
+        {misi.map((isi, i) => (
           <li>
-            <span class="pasal-num">Pasal {i + 1}</span>
-            <h3>{judul}</h3>
+            <span class="pasal-num">Misi {i + 1}</span>
             <p>{isi}</p>
           </li>
         ))}
@@ -51,14 +57,13 @@ const pasal = [
 
   <section class="wrap split legal-table">
     <div class="split-head">
-      <h2>Data kantor</h2>
-      <p>Seluruh data di bagian ini masih contoh untuk demo.</p>
+      <h2>Data perusahaan</h2>
     </div>
     <div>
       <dl class="dl">
-        <div><dt>Nama</dt><dd>{site.entity}</dd></div>
-        <div><dt>Bentuk</dt><dd>Persekutuan perdata</dd></div>
-        <div><dt>Organisasi advokat</dt><dd>Diisi sesuai keanggotaan</dd></div>
+        <div><dt>Platform</dt><dd>{site.name}</dd></div>
+        <div><dt>Dikelola oleh</dt><dd>{site.entity}</dd></div>
+        <div><dt>Bidang</dt><dd>Edukasi, konsultasi, dan informasi hukum</dd></div>
         <div><dt>Alamat</dt><dd>{site.address.join(', ')}</dd></div>
       </dl>
     </div>
@@ -68,5 +73,5 @@ const pasal = [
     <Image src={jakarta} alt="Bundaran Hotel Indonesia di Jakarta dengan gedung tinggi di belakangnya" widths={[800, 1400, 1800]} sizes="100vw" />
   </div>
 
-  <ClosingCta judul="Ingin tahu apakah kami cocok untuk urusan Anda?" />
+  <ClosingCta judul={`${site.tagline}.`} />
 </Base>

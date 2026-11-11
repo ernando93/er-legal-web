@@ -1,4 +1,5 @@
-// Semua orang di bawah ini fiktif untuk demo. Ganti dengan data advokat asli.
+// Semua orang di bawah ini fiktif untuk demo. Company profile belum memuat data tim.
+// Ganti dengan data asli praktisi, pengajar, dan konsultan LawOn.id.
 export type Anggota = {
   slug: string;
   nama: string;
@@ -17,15 +18,14 @@ export const tim: Anggota[] = [
     slug: 'elvira-rahadian',
     nama: 'Elvira Rahadian',
     gelar: 'S.H., LL.M.',
-    jabatan: 'Pendiri, Managing Partner',
+    jabatan: 'Direktur',
     inisial: 'ER',
     warna: 'hijau',
-    fokus: ['Korporasi dan Perizinan', 'Kontrak Bisnis'],
-    ringkas:
-      'Memulai ER Legal setelah bertahun-tahun melihat klien pulang dari rapat hukum tanpa paham apa yang harus dilakukan.',
+    fokus: ['Kelas Korporasi', 'Legal Opinion', 'Legal Due Diligence'],
+    ringkas: 'Mengarahkan pengembangan layanan LawOn.id dan mengajar di Kelas Korporasi.',
     bio: [
-      'Elvira mendampingi pendiri usaha dan perusahaan keluarga dalam urusan korporasi, kontrak, dan persiapan investasi. Ia dikenal rekan-rekannya karena selalu meminta satu halaman ringkasan sebelum memo panjang.',
-      'Di luar pekerjaan klien, Elvira mengisi kelas penyusunan kontrak untuk advokat muda.',
+      'Elvira berpengalaman di bidang hukum perusahaan, kontrak bisnis, dan tata kelola. Di LawOn.id ia mengarahkan pengembangan ketiga layanan dan menjaga mutu pendapat hukum yang diterbitkan.',
+      'Ia juga mengajar di Kelas Korporasi, dengan fokus pada kontrak bisnis dan aspek hukum investasi.',
     ],
     pendidikan: ['Sarjana Hukum, universitas contoh', 'Magister Hukum (LL.M.), universitas contoh'],
   },
@@ -33,13 +33,13 @@ export const tim: Anggota[] = [
     slug: 'bagas-nugroho',
     nama: 'Bagas Nugroho',
     gelar: 'S.H., M.H.',
-    jabatan: 'Partner',
+    jabatan: 'Konsultan Hukum',
     inisial: 'BN',
     warna: 'tinta',
-    fokus: ['Sengketa dan Litigasi Perdata', 'Pertanahan dan Properti'],
-    ringkas: 'Menangani sengketa perdata dan pertanahan, dengan kebiasaan menghitung opsi damai lebih dulu.',
+    fokus: ['Konsultasi Langsung dan Daring', 'Legal Review', 'Kelas Litigasi'],
+    ringkas: 'Menangani konsultasi dan telaah dokumen, serta mengajar di Kelas Litigasi.',
     bio: [
-      'Bagas berpraktik di bidang sengketa perdata dan pertanahan. Setiap perkara ia mulai dengan peta bukti dan perhitungan biaya, supaya klien bisa memutuskan dengan kepala dingin.',
+      'Bagas menangani konsultasi hukum dan telaah dokumen untuk klien perorangan maupun pelaku usaha. Di Kelas Litigasi ia membahas hukum acara dan penyusunan dokumen persidangan.',
     ],
     pendidikan: ['Sarjana Hukum, universitas contoh', 'Magister Hukum, universitas contoh'],
   },
@@ -47,13 +47,13 @@ export const tim: Anggota[] = [
     slug: 'nadia-siregar',
     nama: 'Nadia Siregar',
     gelar: 'S.H., LL.M.',
-    jabatan: 'Senior Associate',
+    jabatan: 'Pengajar, Kelas Kepatuhan',
     inisial: 'NS',
     warna: 'bata',
-    fokus: ['Ketenagakerjaan', 'Keluarga dan Waris'],
-    ringkas: 'Mendampingi perusahaan dan pekerja dalam perselisihan kerja, serta klien dalam perkara keluarga.',
+    fokus: ['Kelas Kepatuhan', 'Pelatihan dan Sertifikasi', 'Legal Drafting'],
+    ringkas: 'Menyusun materi kepatuhan dan manajemen risiko hukum untuk peserta dari dunia usaha.',
     bio: [
-      'Nadia mendampingi perusahaan maupun pekerja, dan juga menangani perkara keluarga yang membutuhkan kerahasiaan tinggi.',
+      'Nadia menyusun dan mengajar materi kepatuhan regulasi serta manajemen risiko hukum, dan terlibat dalam program pelatihan dan sertifikasi.',
     ],
     pendidikan: ['Sarjana Hukum, universitas contoh', 'Magister Hukum (LL.M.), universitas contoh'],
   },
@@ -61,12 +61,12 @@ export const tim: Anggota[] = [
     slug: 'yosua-manurung',
     nama: 'Yosua Manurung',
     gelar: 'S.H.',
-    jabatan: 'Associate',
+    jabatan: 'Editor Publikasi',
     inisial: 'YM',
     warna: 'pasir',
-    fokus: ['Pertanahan dan Properti', 'Kontrak Bisnis'],
-    ringkas: 'Memeriksa dokumen properti dan kontrak, dan menulis sebagian besar artikel panduan kami.',
-    bio: ['Yosua fokus pada pemeriksaan dokumen properti dan kontrak.'],
+    fokus: ['Berita Hukum', 'Publikasi Hukum', 'E-Perpus'],
+    ringkas: 'Mengelola berita, publikasi, dan koleksi E-Perpus LawOn.id.',
+    bio: ['Yosua mengelola berita hukum dan publikasi, serta menyusun koleksi referensi di E-Perpus.'],
     pendidikan: ['Sarjana Hukum, universitas contoh'],
   },
 ];

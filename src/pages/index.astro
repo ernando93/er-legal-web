@@ -19,11 +19,12 @@ const [pendiri, ...anggota] = tim;
 <Base>
   <div class="wrap hero">
     <div class="hero-copy">
-      <h1>Sebelum melangkah secara hukum, Anda perlu tahu posisi Anda.</h1>
-      <p class="lede">ER Legal adalah kantor advokat di Jakarta untuk pelaku usaha dan keluarga. Kami membaca dokumen Anda, menjelaskan risikonya, lalu menyusun langkah berikutnya bersama Anda.</p>
+      <p class="eyebrow">{site.tagline}</p>
+      <h1>Edukasi, konsultasi, dan informasi hukum dalam satu wadah.</h1>
+      <p class="lede">LawOn.id adalah platform layanan hukum yang dikelola {site.entity}. Kami menghadirkan layanan hukum yang profesional, aplikatif, dan mudah diakses oleh masyarakat, profesional, maupun pelaku usaha.</p>
       <div class="hero-act">
-        <a class="btn" href="/kontak">Jadwalkan konsultasi</a>
-        <a class="tlink" href={site.whatsappHref}>Chat lewat WhatsApp</a>
+        <a class="btn" href="/kontak">Konsultasi hukum</a>
+        <a class="tlink" href="/layanan">Lihat semua layanan</a>
       </div>
     </div>
     <figure class="hero-photo">
@@ -33,16 +34,16 @@ const [pendiri, ...anggota] = tim;
   <div class="facts">
     <div class="wrap">
       <ul>
-        <li><Icon name="map-pin" />Jakarta Selatan</li>
-        <li><Icon name="clock" />Senin sampai Jumat, 09.00 sampai 18.00</li>
+        <li><Icon name="map-pin" />Kuningan, Jakarta Selatan</li>
+        <li><Icon name="whatsapp-logo" /><a href={site.whatsappHref}>Konsultasi lewat WhatsApp</a></li>
       </ul>
     </div>
   </div>
 
   <section class="wrap split s-services">
     <div class="split-head">
-      <h2>Bidang yang kami tangani</h2>
-      <p>Kalau masalah Anda tidak ada di daftar ini, tanyakan saja. Bila bukan keahlian kami, kami akan bilang.</p>
+      <h2>Tiga layanan, satu tempat</h2>
+      <p>Belajar hukum, menyelesaikan persoalan hukum, atau mengikuti perkembangan regulasi. Mulai dari yang paling Anda butuhkan.</p>
       <a class="tlink" href="/layanan">Lihat semua layanan</a>
     </div>
     <ol class="index">
@@ -50,7 +51,7 @@ const [pendiri, ...anggota] = tim;
         <li>
           <a href={`/layanan/${l.slug}`}>
             <h3>{l.title}</h3>
-            <p>{l.short}</p>
+            <p>{l.short}<span class="index-meta">{l.untuk}</span></p>
             <Icon name="arrow-right" size={22} />
           </a>
         </li>
@@ -60,22 +61,22 @@ const [pendiri, ...anggota] = tim;
 
   <section class="process">
     <div class="wrap">
-      <h2>Tidak perlu mengerti istilah hukum untuk mulai bicara dengan kami.</h2>
+      <h2>Hukum bukan sekadar kumpulan aturan, melainkan bidang keilmuan yang perlu dikuasai dan diterapkan dengan tepat.</h2>
       <ol class="steps">
         <li>
-          <span class="when">Pertemuan pertama</span>
-          <h3>Anda bercerita</h3>
-          <p>Secara tatap muka atau daring. Bawa dokumen yang ada, walau belum rapi. Kami yang akan menyusun kronologinya.</p>
+          <span class="when">Pengetahuan</span>
+          <h3>Butuh proses untuk dipahami</h3>
+          <p>Lewat edukasi hukum, kami menyediakan ruang belajar untuk meningkatkan pengetahuan dan mengembangkan kompetensi.</p>
         </li>
         <li>
-          <span class="when">Setelah dokumen dibaca</span>
-          <h3>Anda menerima peta</h3>
-          <p>Posisi hukum Anda, pilihan langkah, perkiraan waktu, dan biayanya, secara tertulis.</p>
+          <span class="when">Persoalan</span>
+          <h3>Butuh ketelitian untuk dianalisis</h3>
+          <p>Lewat konsultasi hukum, kami menjawab kebutuhan dan permasalahan hukum secara responsif dan solutif.</p>
         </li>
         <li>
-          <span class="when">Selama ditangani</span>
-          <h3>Anda tetap tahu</h3>
-          <p>Satu advokat sebagai kontak utama, dengan kabar berkala tentang perkembangan terakhir.</p>
+          <span class="when">Solusi</span>
+          <h3>Butuh pendekatan yang tepat</h3>
+          <p>Lewat informasi hukum, kami membuka akses ke perkembangan regulasi, literatur, dan wawasan hukum yang relevan.</p>
         </li>
       </ol>
     </div>
@@ -84,15 +85,16 @@ const [pendiri, ...anggota] = tim;
   <section class="stance">
     <Image src={tandaTangan} alt="Tangan menandatangani dokumen dengan pena" widths={[600, 1000, 1400]} sizes="(max-width: 880px) 100vw, 50vw" />
     <div class="stance-copy">
-      <blockquote>Kami tidak menjanjikan hasil perkara. Tidak ada advokat yang boleh melakukannya.</blockquote>
-      <p>Yang bisa kami pastikan adalah cara kerjanya: penilaian yang jujur, biaya yang disepakati di awal, dan kerahasiaan yang dijaga.</p>
-      <a class="tlink" href="/tentang">Cara kami bekerja</a>
+      <p class="eyebrow">Visi</p>
+      <blockquote>Menjadi platform layanan hukum yang profesional, inovatif, dan terpercaya.</blockquote>
+      <p>Dalam memperluas akses pengetahuan, informasi, serta solusi hukum, dengan mengedepankan pengetahuan, kompetensi, profesionalisme, dan kebermanfaatan.</p>
+      <a class="tlink" href="/tentang">Visi dan misi kami</a>
     </div>
   </section>
 
   <section class="wrap s-team">
     <div class="team-head">
-      <h2>Orang yang akan Anda temui</h2>
+      <h2>Orang di balik LawOn.id</h2>
       <a class="tlink" href="/tim">Seluruh tim</a>
     </div>
     <div class="team-feature">
@@ -112,7 +114,7 @@ const [pendiri, ...anggota] = tim;
 
   <section class="s-articles">
     <div class="wrap">
-      <h2>Bacaan singkat</h2>
+      <h2>Publikasi hukum</h2>
       <div class="articles-grid">
         <a class="a-feature" href={`/artikel/${utama.id}`}>
           <Image src={buku} alt="Tumpukan buku dan pena di atas meja" widths={[600, 1000]} sizes="(max-width: 880px) 100vw, 55vw" />
@@ -129,7 +131,7 @@ const [pendiri, ...anggota] = tim;
               </a>
             </li>
           ))}
-          <li><a class="tlink" href="/artikel">Semua artikel</a></li>
+          <li><a class="tlink" href="/artikel">Semua publikasi</a></li>
         </ul>
       </div>
     </div>

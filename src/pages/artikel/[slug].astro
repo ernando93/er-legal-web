@@ -19,7 +19,7 @@ const foto = { Kontrak: buku, Sengketa: perpustakaan, Ketenagakerjaan: dokumen }
 <Base title={entry.data.title} description={entry.data.excerpt}>
   <header class="wrap article-head">
     <div class="article-head-in">
-      <p class="crumb"><a href="/artikel">Artikel</a></p>
+      <p class="crumb"><a href="/artikel">Publikasi</a></p>
       <h1>{entry.data.title}</h1>
       <p class="muted" style="margin-top:1.25rem">{entry.data.author}, {tanggal(entry.data.date)}</p>
     </div>
@@ -30,8 +30,8 @@ const foto = { Kontrak: buku, Sengketa: perpustakaan, Ketenagakerjaan: dokumen }
   <article class="wrap">
     <div class="prose-wrap">
       <div class="prose"><Content /></div>
-      <p class="demo-note">Artikel contoh untuk demo dan belum ditinjau advokat. Tulisan ini informasi umum, bukan nasihat hukum untuk kasus tertentu.</p>
+      <p class="demo-note">Artikel contoh untuk demo dan belum ditinjau. Tulisan ini informasi umum, bukan nasihat hukum untuk kasus tertentu.</p>
     </div>
   </article>
-  <ClosingCta judul="Punya pertanyaan untuk kasus Anda sendiri?" />
+  <ClosingCta judul="Punya pertanyaan untuk persoalan Anda sendiri?" />
 </Base>
