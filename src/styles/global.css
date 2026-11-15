@@ -389,3 +389,127 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offs
 .detail .svc-items h2 { margin: 0; font-size: clamp(1.35rem, 1.2rem + .6vw, 1.7rem); }
 .svc-items p { margin: 0; color: var(--ink-soft); max-width: 40em; }
 .detail .svc-other-head { font-size: 1.35rem; }
+
+/* Header menempel saat scroll */
+:root { --hh: 76px; }
+@media (max-width: 880px) { :root { --hh: 64px; } }
+html { scroll-padding-top: calc(var(--hh) + 1rem); }
+.site-header { position: sticky; top: 0; transition: box-shadow .25s ease; }
+.site-header.is-scrolled { box-shadow: 0 10px 28px -22px rgba(13, 35, 80, .45); }
+.split-head, .aside { top: calc(var(--hh) + 2rem); }
+@media (min-width: 761px) { .profile .portrait { top: calc(var(--hh) + 2rem); } }
+
+/* Untuk siapa */
+.audience { padding-block: clamp(7rem, 12vw, 11rem) clamp(3rem, 6vw, 5rem); }
+@media (max-width: 1000px) { .audience { padding-top: 3.5rem; } }
+.audience-title { max-width: 16em; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.audience-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.audience-list > li { padding: 1.5rem clamp(1rem, 2.5vw, 2.25rem) .5rem 0; }
+.audience-list > li + li { border-left: 1px solid var(--rule); padding-left: clamp(1rem, 2.5vw, 2.25rem); }
+.audience-list h3 { font-size: clamp(1.45rem, 1.25rem + .8vw, 1.9rem); margin-bottom: .6rem; }
+.audience-list p { color: var(--ink-soft); }
+.audience-links { margin-top: 1.1rem; display: flex; flex-direction: column; gap: .4rem; font-size: .95rem; }
+.audience-links a { color: var(--accent); text-underline-offset: .22em; text-decoration-thickness: 1px; }
+.audience-links a:hover { color: var(--navy); }
+@media (max-width: 760px) {
+  .audience-list { grid-template-columns: 1fr; }
+  .audience-list > li { padding-right: 0; padding-bottom: 1.5rem; }
+  .audience-list > li + li { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; }
+}
+.s-services { padding-top: clamp(3rem, 6vw, 5rem); }
+
+/* Alur konsultasi */
+.alur { background: var(--paper-2); padding-block: clamp(3.5rem, 7vw, 6rem); }
+.alur-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem 3rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.alur-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem clamp(1.25rem, 3vw, 2.5rem); }
+.alur-list li { border-top: 1px solid var(--ink); padding-top: 1.1rem; }
+.alur-num { display: block; font-family: var(--serif); font-size: clamp(2.2rem, 1.8rem + 1.6vw, 3.2rem); line-height: 1; color: var(--accent); margin-bottom: 1.1rem; }
+.alur-list h3 { font-size: 1.3rem; margin-bottom: .5rem; }
+.alur-list p { color: var(--ink-soft); font-size: .98rem; }
+@media (max-width: 900px) { .alur-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .alur-list { grid-template-columns: 1fr; } }
+
+/* Tombol WhatsApp melayang */
+.wa-float { position: fixed; right: clamp(16px, 2.5vw, 28px); bottom: clamp(16px, 2.5vw, 28px); z-index: 30; display: inline-flex; align-items: center; gap: .6rem; background: var(--navy); color: #fff; text-decoration: none; border-radius: 999px; padding: .8rem 1.2rem .8rem .95rem; font-size: .95rem; font-weight: 500; box-shadow: 0 12px 30px -14px rgba(13, 35, 80, .6); transition: background-color .15s, transform .15s; }
+.wa-float:hover { background: var(--navy-deep); transform: translateY(-2px); }
+.wa-float .icon { color: var(--gold); }
+.wa-float:focus-visible { outline-color: var(--gold); }
+@media (max-width: 880px) {
+  .wa-float { width: 56px; height: 56px; padding: 0; justify-content: center; }
+  .wa-float-label { display: none; }
+  .site-footer { padding-bottom: calc(2rem + 72px); }
+}
+
+/* Animasi muncul */
+.reveal-on [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1); }
+.reveal-on [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* 404 */
+.nf { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(1.5rem, 5vw, 5rem); padding-block: clamp(3.5rem, 9vw, 8rem); }
+.nf-code { font-family: var(--serif); font-size: clamp(6rem, 4rem + 10vw, 13rem); line-height: .85; letter-spacing: -.04em; color: var(--navy); margin: 0; }
+.nf-body h1 { font-size: clamp(2rem, 1.5rem + 2.4vw, 3.4rem); }
+.nf-body .lede { margin-top: 1.25rem; max-width: 32em; }
+.nf-links { margin-top: 2rem; border-top: 1px solid var(--ink); max-width: 32rem; }
+.nf-links li { border-bottom: 1px solid var(--rule); }
+.nf-links a { display: block; padding: .8rem 0; text-decoration: none; }
+.nf-links a:hover { color: var(--accent); }
+@media (max-width: 760px) { .nf { grid-template-columns: 1fr; } }
+
+/* Perpindahan halaman yang halus (browser yang mendukung saja) */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .3s; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* Detail tipografi */
+p, li, dd { text-wrap: pretty; }
+::selection { background: var(--navy); color: #fff; }
+
+/* Nada foto diseragamkan, sedikit lebih kalem */
+.hero-photo img, .stance img, .wide-photo img, .a-feature img, .article-photo img { filter: saturate(.8) contrast(1.04); }
+
+/* Menu HP layar penuh */
+.nav-extra { display: none; }
+html.menu-open { overflow: hidden; }
+html.menu-open .wa-float { display: none; }
+@media (max-width: 880px) {
+  .nav { position: fixed; top: var(--hh); left: 0; right: 0; bottom: 0; display: flex; overflow-y: auto; padding: 1rem var(--gutter) 2rem; border-bottom: 0; font-size: 1rem; visibility: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s; }
+  .nav.is-open { visibility: visible; opacity: 1; transform: none; transition: opacity .25s ease, transform .25s ease; }
+  .nav > a:not(.nav-cta) { font-family: var(--serif); font-size: clamp(1.7rem, 1.3rem + 2vw, 2.2rem); line-height: 1.2; padding: .75rem 0; border-bottom: 1px solid var(--rule); }
+  .nav > a[aria-current]:not(.nav-cta) { color: var(--accent); border-bottom-color: var(--rule); }
+  .nav .nav-cta { margin-top: 1.75rem; font-size: 1.05rem; }
+  .nav-extra { display: flex; flex-direction: column; gap: .4rem; margin-top: auto; padding-top: 2.5rem; color: var(--ink-soft); font-size: .95rem; }
+  .nav-extra p { font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+  .nav-extra a { text-decoration: none; padding: 0; border: 0; }
+}
+
+/* Panel foto tim: palet navy dengan bingkai emas tipis */
+.portrait { outline: 1px solid rgba(212, 165, 55, .5); outline-offset: -12px; padding: 1.5rem; }
+.portrait--hijau { background: var(--navy); color: var(--on-dark); }
+.portrait--tinta { background: var(--ink); color: var(--on-dark); }
+.portrait--bata { background: var(--navy-deep); color: var(--on-dark); }
+.portrait--pasir { background: var(--paper-2); color: var(--navy); outline-color: rgba(19, 48, 107, .25); }
+.portrait--hijau .portrait-init, .portrait--tinta .portrait-init, .portrait--bata .portrait-init { color: var(--gold); }
+.portrait-init { top: .1em; left: .16em; }
+.portrait-note { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+
+/* Halaman artikel */
+.read-progress { position: fixed; top: var(--hh); left: 0; right: 0; height: 2px; z-index: 19; pointer-events: none; }
+.read-progress span { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; }
+.crumb-sep { color: var(--sand); margin: 0 .35rem; }
+.article-meta { display: flex; flex-wrap: wrap; gap: .25rem 0; margin-top: 1.4rem; color: var(--ink-soft); font-size: .95rem; }
+.article-meta span + span::before { content: '\00B7'; margin: 0 .7rem; color: var(--accent); }
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--ink); font-size: .95rem; }
+.share-lab { font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); margin-right: .25rem; }
+.share a, .share button { color: var(--navy); background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--gold); text-underline-offset: .25em; }
+.share a:hover, .share button:hover { color: var(--accent); }
+.share + .demo-note { border-top: 0; margin-top: 1.25rem; padding-top: 0; }
+.more { background: var(--paper-2); padding-block: clamp(3.5rem, 7vw, 6rem); }
+.more-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem clamp(2rem, 5vw, 4rem); }
+.more-list li { border-top: 1px solid var(--ink); padding-top: 1.25rem; }
+.more-list a { display: block; text-decoration: none; }
+.more-list h3 { font-size: clamp(1.35rem, 1.2rem + .7vw, 1.8rem); margin-bottom: .6rem; }
+.more-list a:hover h3 { color: var(--accent); }
+@media (max-width: 760px) { .more-list { grid-template-columns: 1fr; } }
+
+/* Peta di halaman Kontak */
+.map iframe { display: block; width: 100%; height: clamp(320px, 40vw, 480px); border: 0; filter: grayscale(.4) contrast(1.02); }

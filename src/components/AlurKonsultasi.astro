@@ -1,0 +1,27 @@
+---
+// Alur konsultasi. Tidak menyebut janji waktu atau biaya karena belum ada data dari client.
+const { judul = 'Bagaimana konsultasi berjalan' } = Astro.props;
+const langkah = [
+  ['Hubungi kami', 'Lewat formulir atau WhatsApp. Ceritakan persoalan Anda secara singkat, tidak perlu memakai istilah hukum.'],
+  ['Penjadwalan', 'Tim kami menghubungi Anda untuk menyepakati waktu dan cara konsultasi, secara langsung atau daring.'],
+  ['Telaah', 'Fakta dan dokumen Anda dipelajari berdasarkan peraturan perundang-undangan yang berlaku.'],
+  ['Arahan dan tindak lanjut', 'Anda menerima tanggapan dan arahan awal. Bila perlu, dapat dilanjutkan dengan legal opinion, legal review, atau legal drafting.'],
+];
+---
+<section class="alur" data-reveal>
+  <div class="wrap">
+    <div class="alur-head">
+      <h2>{judul}</h2>
+      <a class="tlink" href="/kontak">Mulai konsultasi</a>
+    </div>
+    <ol class="alur-list">
+      {langkah.map(([j, isi], i) => (
+        <li>
+          <span class="alur-num">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{j}</h3>
+          <p>{isi}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

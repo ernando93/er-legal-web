@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { layanan, type Layanan } from '../../data/layanan';
 import { site } from '../../data/site';
+import AlurKonsultasi from '../../components/AlurKonsultasi.astro';
 
 export function getStaticPaths() {
   return layanan.map((l) => ({ params: { slug: l.slug }, props: { l } }));
@@ -41,4 +42,5 @@ const lain = layanan.filter((x) => x.slug !== l.slug);
       <a class="tlink" href={site.whatsappHref}>Chat lewat WhatsApp</a>
     </aside>
   </div>
+  {l.slug === 'konsultasi-hukum' && <AlurKonsultasi />}
 </Base>

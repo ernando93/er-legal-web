@@ -28,6 +28,8 @@ const prefixLinks = {
 };
 
 export default defineConfig({
+  // Alamat utama website, dipakai untuk preview link. Ganti saat pindah ke domain sendiri.
+  site: process.env.SITE_URL || 'https://ernando93.github.io',
   base: base || undefined,
   integrations: base ? [prefixLinks] : [],
   devToolbar: { enabled: false },

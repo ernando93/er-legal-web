@@ -14,6 +14,10 @@ export const site = {
     'Jl. H.R. Rasuna Said Kav. VI No. 9 Blok X2',
     'Kuningan Timur, Setiabudi, Jakarta Selatan 12950',
   ],
+  // Peta di halaman Kontak. Pastikan titiknya tepat sebelum live.
+  mapEmbed:
+    'https://www.google.com/maps?output=embed&hl=id&q=' +
+    encodeURIComponent('Menara Agrinas Palma, Jl. H.R. Rasuna Said Kav. VI No. 9, Kuningan Timur, Setiabudi, Jakarta Selatan'),
   mapLink:
     'https://www.google.com/maps/search/?api=1&query=' +
     encodeURIComponent('Menara Agrinas Palma, Jl. H.R. Rasuna Said, Jakarta Selatan'),

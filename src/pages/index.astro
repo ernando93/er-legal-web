@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Portrait from '../components/Portrait.astro';
 import ClosingCta from '../components/ClosingCta.astro';
+import AlurKonsultasi from '../components/AlurKonsultasi.astro';
 import { site, tanggal } from '../data/site';
 import { layanan } from '../data/layanan';
 import { tim } from '../data/tim';
@@ -15,6 +16,25 @@ import buku from '../assets/photos/buku.jpg';
 const artikel = (await getCollection('artikel')).sort((a, b) => +b.data.date - +a.data.date);
 const [utama, ...lain] = artikel;
 const [pendiri, ...anggota] = tim;
+
+// Tiga kelompok sasaran, sesuai company profile: masyarakat, profesional, dan pelaku usaha.
+const sasaran = [
+  {
+    siapa: 'Masyarakat',
+    isi: 'Memahami hak dan kewajiban, serta mendapat arahan awal atas persoalan hukum yang dihadapi.',
+    tautan: [['Konsultasi Langsung dan Daring', 'konsultasi-hukum'], ['Berita Hukum', 'informasi-hukum']],
+  },
+  {
+    siapa: 'Profesional',
+    isi: 'Mengembangkan kompetensi lewat kelas dan pelatihan, serta mengakses referensi hukum yang kredibel.',
+    tautan: [['Kelas Litigasi', 'edukasi-hukum'], ['Pelatihan dan Sertifikasi', 'edukasi-hukum'], ['E-Perpus', 'informasi-hukum']],
+  },
+  {
+    siapa: 'Pelaku usaha',
+    isi: 'Menjaga kegiatan usaha tetap sesuai aturan, dari penyusunan kontrak sampai kepatuhan regulasi.',
+    tautan: [['Legal Drafting', 'konsultasi-hukum'], ['Legal Due Diligence', 'konsultasi-hukum'], ['Kelas Kepatuhan', 'edukasi-hukum']],
+  },
+];
 ---
 <Base>
   <div class="wrap hero">
@@ -40,7 +60,22 @@ const [pendiri, ...anggota] = tim;
     </div>
   </div>
 
-  <section class="wrap split s-services">
+  <section class="wrap audience" data-reveal>
+    <h2 class="audience-title">Untuk siapa LawOn.id</h2>
+    <ul class="audience-list">
+      {sasaran.map((s) => (
+        <li>
+          <h3>{s.siapa}</h3>
+          <p>{s.isi}</p>
+          <ul class="audience-links">
+            {s.tautan.map(([nama, slug]) => <li><a href={`/layanan/${slug}`}>{nama}</a></li>)}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap split s-services" data-reveal>
     <div class="split-head">
       <h2>Tiga layanan, satu tempat</h2>
       <p>Belajar hukum, menyelesaikan persoalan hukum, atau mengikuti perkembangan regulasi. Mulai dari yang paling Anda butuhkan.</p>
@@ -59,7 +94,9 @@ const [pendiri, ...anggota] = tim;
     </ol>
   </section>
 
-  <section class="process">
+  <AlurKonsultasi />
+
+  <section class="process" data-reveal>
     <div class="wrap">
       <h2>Hukum bukan sekadar kumpulan aturan, melainkan bidang keilmuan yang perlu dikuasai dan diterapkan dengan tepat.</h2>
       <ol class="steps">
@@ -82,7 +119,7 @@ const [pendiri, ...anggota] = tim;
     </div>
   </section>
 
-  <section class="stance">
+  <section class="stance" data-reveal>
     <Image src={tandaTangan} alt="Tangan menandatangani dokumen dengan pena" widths={[600, 1000, 1400]} sizes="(max-width: 880px) 100vw, 50vw" />
     <div class="stance-copy">
       <p class="eyebrow">Visi</p>
@@ -92,7 +129,7 @@ const [pendiri, ...anggota] = tim;
     </div>
   </section>
 
-  <section class="wrap s-team">
+  <section class="wrap s-team" data-reveal>
     <div class="team-head">
       <h2>Orang di balik LawOn.id</h2>
       <a class="tlink" href="/tim">Seluruh tim</a>
@@ -112,7 +149,7 @@ const [pendiri, ...anggota] = tim;
     </div>
   </section>
 
-  <section class="s-articles">
+  <section class="s-articles" data-reveal>
     <div class="wrap">
       <h2>Publikasi hukum</h2>
       <div class="articles-grid">

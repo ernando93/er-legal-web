@@ -1,9 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
+import { layanan } from '../data/layanan';
 ---
 <Base title="Halaman tidak ditemukan">
-  <div class="wrap doc">
-    <h1>Halaman ini tidak ada.</h1>
-    <p style="margin-top:1.25rem">Mungkin tautannya sudah berubah. <a class="tlink" href="/">Kembali ke beranda</a></p>
+  <div class="wrap nf">
+    <p class="nf-code">404</p>
+    <div class="nf-body">
+      <h1>Halaman ini tidak ditemukan.</h1>
+      <p class="lede">Tautannya mungkin sudah berubah atau halaman ini sudah dipindahkan. Silakan mulai dari salah satu halaman berikut.</p>
+      <ul class="nf-links">
+        <li><a href="/">Beranda</a></li>
+        {layanan.map((l) => <li><a href={`/layanan/${l.slug}`}>{l.title}</a></li>)}
+        <li><a href="/kontak">Kontak</a></li>
+      </ul>
+    </div>
   </div>
 </Base>

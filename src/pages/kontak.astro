@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import jakarta from '../assets/photos/jakarta.jpg';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
@@ -64,7 +62,7 @@ import { layanan } from '../data/layanan';
   </div>
 
   <div class="map">
-    <Image src={jakarta} alt="Bundaran Hotel Indonesia di Jakarta" widths={[800, 1400, 1800]} sizes="100vw" />
+    <iframe src={site.mapEmbed} title="Peta lokasi kantor LawOn.id di Menara Agrinas Palma, Jakarta Selatan" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <a class="btn map-link" href={site.mapLink} target="_blank" rel="noopener">Buka di Google Maps</a>
   </div>
 </Base>
