@@ -1,0 +1,105 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Galeri from '../../components/Galeri.astro';
+import { type Acara, hariTanggal, waktuLabel, selesaiAt, daftarHref, kalenderHref, slideAcara } from '../../data/acara';
+import sharp from 'sharp';
+import { tim } from '../../data/tim';
+
+export async function getStaticPaths() {
+  return (await getCollection('acara')).map((a) => ({ params: { slug: a.id }, props: { a } }));
+}
+const { a } = Astro.props as { a: Acara };
+const { Content } = await render(a);
+const d = a.data;
+const slide = slideAcara(a);
+
+// Bingkai slider mengikuti bentuk gambar pertama (poster tegak atau foto mendatar).
+let rasio = 4 / 5;
+if (slide[0]?.startsWith('/')) {
+  try {
+    const m = await sharp(`public${slide[0]}`).metadata();
+    if (m.width && m.height) rasio = Math.min(1.6, Math.max(0.8, m.width / m.height));
+  } catch {}
+}
+
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const selesai = +selesaiAt(a);
+const lewat = selesai < Date.now();
+const shareWa = `https://wa.me/?text=${encodeURIComponent(`${d.title} ${url}`)}`;
+// Pembicara yang ada di halaman Tim diberi tautan ke profilnya.
+const profil = (nama: string) => tim.find((t) => t.nama === nama)?.slug;
+---
+<Base title={d.title} description={d.excerpt}>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="crumb"><a href="/agenda">Agenda</a> <span class="crumb-sep">/</span> {d.jenis}</p>
+      <div class="page-head-in">
+        <h1 class="ev-title">{d.title}</h1>
+        <p class="lede">{d.excerpt}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap detail ev-detail">
+    {slide.length > 0 && <div class="ev-gal"><Galeri gambar={slide} judul={d.title} rasio={rasio} /></div>}
+
+    <aside class="aside ev-aside" id="ev-aside" data-selesai={selesai}>
+      <dl class="ev-facts">
+        <div><dt>Tanggal</dt><dd>{hariTanggal(a)}</dd></div>
+        <div><dt>Waktu</dt><dd>{waktuLabel(a)}</dd></div>
+        <div><dt>Format</dt><dd>{d.format}</dd></div>
+        <div><dt>Lokasi</dt><dd>{d.lokasi}</dd></div>
+        {d.pembicara.length > 0 && (
+          <div>
+            <dt>Pembicara</dt>
+            <dd>
+              {d.pembicara.map((p, i) => (
+                <>
+                  {profil(p) ? <a class="tlink" href={`/tim/${profil(p)}`}>{p}</a> : p}
+                  {i < d.pembicara.length - 1 && <br />}
+                </>
+              ))}
+            </dd>
+          </div>
+        )}
+        <div><dt>Biaya</dt><dd class="ev-fee">{d.biaya}</dd></div>
+      </dl>
+      <div class="ev-cta" hidden={lewat}>
+        <a class="btn" href={daftarHref(a)} target="_blank" rel="noopener">Daftar sekarang</a>
+        <a class="tlink" href={kalenderHref(a, url)} target="_blank" rel="noopener">Simpan ke Google Calendar</a>
+      </div>
+      <p class="ev-done" hidden={!lewat}>Acara ini sudah berlangsung. Lihat <a class="tlink" href="/agenda">agenda lainnya</a>.</p>
+    </aside>
+
+    <div class="ev-main">
+      <div class="prose"><Content /></div>
+      <div class="share">
+        <span class="share-lab">Bagikan</span>
+        <a href={shareWa} target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" id="salin" data-url={url}>Salin tautan</button>
+      </div>
+      <p class="demo-note">Acara contoh untuk demo.</p>
+    </div>
+  </div>
+</Base>
+
+<script>
+  // Bila acara selesai setelah build terakhir, tombol daftar disembunyikan.
+  const aside = document.getElementById('ev-aside');
+  if (aside && Number(aside.dataset.selesai) < Date.now()) {
+    aside.querySelector('.ev-cta')?.setAttribute('hidden', '');
+    aside.querySelector('.ev-done')?.removeAttribute('hidden');
+  }
+
+  const btn = document.getElementById('salin') as HTMLButtonElement | null;
+  btn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.url ?? location.href);
+      btn.textContent = 'Tautan tersalin';
+    } catch {
+      btn.textContent = 'Gagal menyalin';
+    }
+    setTimeout(() => (btn.textContent = 'Salin tautan'), 2200);
+  });
+</script>

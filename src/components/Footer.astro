@@ -1,7 +1,10 @@
 ---
 import Logo from './Logo.astro';
-import { nav, site } from '../data/site';
+import { site } from '../data/site';
+import { menu } from '../data/menu';
 import { layanan } from '../data/layanan';
+
+const nav = await menu();
 ---
 <footer class="site-footer">
   <div class="wrap footer-grid">
@@ -33,6 +36,6 @@ import { layanan } from '../data/layanan';
       <a href="/kebijakan-privasi">Kebijakan Privasi</a>
       <span>© {new Date().getFullYear()} {site.entity}</span>
     </p>
-    <p class="footer-demo">Versi demo. Nomor WhatsApp, email, profil tim, dan artikel masih contoh.</p>
+    <p class="footer-demo">Versi demo. Nomor WhatsApp, email, profil tim, artikel, dan agenda masih contoh.</p>
   </div>
 </footer>

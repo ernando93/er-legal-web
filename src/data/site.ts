@@ -27,6 +27,7 @@ export const nav = [
   { href: '/', label: 'Beranda' },
   { href: '/tentang', label: 'Tentang Kami' },
   { href: '/layanan', label: 'Layanan' },
+  { href: '/agenda', label: 'Agenda' },
   { href: '/tim', label: 'Tim' },
   { href: '/artikel', label: 'Publikasi' },
 ];

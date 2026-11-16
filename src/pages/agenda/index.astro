@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import AcaraItem from '../../components/AcaraItem.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
+import { semuaAcara } from '../../data/acara';
+import { site } from '../../data/site';
+
+const { akan, lewat } = await semuaAcara();
+---
+<Base title="Agenda" description="Kelas, pelatihan, dan webinar hukum dari LawOn.id.">
+  <div class="page-head">
+    <div class="wrap page-head-in">
+      <h1>Agenda</h1>
+      <p class="lede">Kelas, pelatihan, dan diskusi hukum dari LawOn.id, terbuka untuk masyarakat, profesional, dan pelaku usaha.</p>
+    </div>
+  </div>
+
+  <section class="wrap ev-sec">
+    <h2 class="ev-sec-title">Akan datang</h2>
+    <ul class="ev-list" id="ev-akan">
+      {akan.map((a) => <AcaraItem a={a} />)}
+    </ul>
+    <p class="ev-empty" id="ev-kosong" hidden={akan.length > 0}>
+      Belum ada agenda terjadwal. Ikuti kabar terbaru melalui <a class="tlink" href={site.whatsappHref}>WhatsApp kami</a>.
+    </p>
+  </section>
+
+  <section class="wrap ev-sec ev-sec--past" id="ev-lewat-sec" hidden={lewat.length === 0}>
+    <h2 class="ev-sec-title">Sudah berlangsung</h2>
+    <ul class="ev-list" id="ev-lewat">
+      {lewat.map((a) => <AcaraItem a={a} lewat />)}
+    </ul>
+  </section>
+
+  <ClosingCta judul="Ingin mengadakan kelas atau pelatihan hukum untuk tim Anda?" />
+</Base>
+
+<script>
+  // Halaman dibuat saat build. Acara yang sudah selesai sejak build terakhir dipindahkan di sini.
+  const akan = document.getElementById('ev-akan');
+  const lewat = document.getElementById('ev-lewat');
+  const now = Date.now();
+  akan?.querySelectorAll<HTMLElement>('li[data-selesai]').forEach((li) => {
+    if (Number(li.dataset.selesai) < now) {
+      li.classList.add('is-past');
+      lewat?.prepend(li);
+      document.getElementById('ev-lewat-sec')?.removeAttribute('hidden');
+    }
+  });
+  if (akan && akan.children.length === 0) document.getElementById('ev-kosong')?.removeAttribute('hidden');
+</script>

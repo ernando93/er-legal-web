@@ -6,6 +6,8 @@ import Icon from '../components/Icon.astro';
 import Portrait from '../components/Portrait.astro';
 import ClosingCta from '../components/ClosingCta.astro';
 import AlurKonsultasi from '../components/AlurKonsultasi.astro';
+import AcaraItem from '../components/AcaraItem.astro';
+import { semuaAcara } from '../data/acara';
 import { site, tanggal } from '../data/site';
 import { layanan } from '../data/layanan';
 import { tim } from '../data/tim';
@@ -16,6 +18,7 @@ import buku from '../assets/photos/buku.jpg';
 const artikel = (await getCollection('artikel')).sort((a, b) => +b.data.date - +a.data.date);
 const [utama, ...lain] = artikel;
 const [pendiri, ...anggota] = tim;
+const agenda = (await semuaAcara()).akan.slice(0, 2);
 
 // Tiga kelompok sasaran, sesuai company profile: masyarakat, profesional, dan pelaku usaha.
 const sasaran = [
@@ -129,6 +132,7 @@ const sasaran = [
     </div>
   </section>
 
+  {pendiri && (
   <section class="wrap s-team" data-reveal>
     <div class="team-head">
       <h2>Orang di balik LawOn.id</h2>
@@ -148,7 +152,21 @@ const sasaran = [
       </div>
     </div>
   </section>
+  )}
 
+  {agenda.length > 0 && (
+    <section class="wrap s-agenda" data-reveal>
+      <div class="alur-head">
+        <h2>Agenda terdekat</h2>
+        <a class="tlink" href="/agenda">Semua agenda</a>
+      </div>
+      <ul class="ev-list">
+        {agenda.map((a) => <AcaraItem a={a} />)}
+      </ul>
+    </section>
+  )}
+
+  {utama && (
   <section class="s-articles" data-reveal>
     <div class="wrap">
       <h2>Publikasi hukum</h2>
@@ -173,6 +191,7 @@ const sasaran = [
       </div>
     </div>
   </section>
+  )}
 
   <ClosingCta />
 </Base>

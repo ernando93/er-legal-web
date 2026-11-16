@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import { type Acara, tgl, bulan, tahun, waktuLabel, selesaiAt, fotoAcara } from '../data/acara';
+
+interface Props { a: Acara; lewat?: boolean }
+const { a, lewat = false } = Astro.props;
+const foto = fotoAcara(a);
+---
+<li class:list={['ev', { 'is-past': lewat }]} data-selesai={+selesaiAt(a)}>
+  <a href={`/agenda/${a.id}`}>
+    <span class="ev-photo">
+      {typeof foto === 'string'
+        ? <img src={foto} alt="" loading="lazy" />
+        : <Image src={foto} alt="" widths={[480, 800]} sizes="(max-width: 760px) 22rem, 12rem" />}
+    </span>
+    <span class="ev-date">
+      <span class="ev-d">{tgl(a)}</span>
+      <span class="ev-m">{bulan(a)} {tahun(a)}</span>
+    </span>
+    <div class="ev-body">
+      <span class="ev-tag">{a.data.jenis}<span class="ev-dot">·</span>{a.data.format}</span>
+      <h3>{a.data.title}</h3>
+      <p>{a.data.excerpt}</p>
+      <span class="ev-meta">{waktuLabel(a)}<span class="ev-dot">·</span><span class="ev-fee">{a.data.biaya}</span></span>
+    </div>
+  </a>
+</li>

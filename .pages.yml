@@ -1,0 +1,151 @@
+# Panel admin LawOn.id (Pages CMS, https://pagescms.org).
+# Admin mengisi formulir, Pages CMS menyimpan file ke repo, lalu GitHub Actions membangun ulang website.
+
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+  categories: [image]
+
+content:
+  - name: acara
+    label: Agenda
+    type: collection
+    path: src/content/acara
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, tanggal, jenis]
+      primary: title
+      sort: [tanggal, title]
+      default:
+        sort: tanggal
+        order: desc
+    fields:
+      - name: title
+        label: Judul acara
+        type: string
+        required: true
+      - name: excerpt
+        label: Ringkasan singkat
+        description: Satu atau dua kalimat. Tampil di daftar agenda dan saat link dibagikan.
+        type: text
+        required: true
+        options:
+          maxlength: 240
+      - name: jenis
+        label: Jenis
+        type: select
+        required: true
+        options:
+          values: [Kelas, Pelatihan, Webinar, Seminar, Diskusi]
+      - name: tanggal
+        label: Tanggal
+        type: date
+        required: true
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: mulai
+        label: Jam mulai (WIB)
+        description: Contoh 09.00
+        type: string
+        required: true
+        pattern:
+          regex: "^[0-9]{1,2}[.:][0-9]{2}$"
+          message: Tulis jam seperti 09.00
+      - name: selesai
+        label: Jam selesai (WIB)
+        description: Contoh 12.00. Boleh dikosongkan.
+        type: string
+      - name: format
+        label: Format
+        type: select
+        required: true
+        options:
+          values: [Offline, Online, Hybrid]
+      - name: lokasi
+        label: Lokasi
+        description: Alamat tempat, atau misalnya "Zoom (tautan dikirim setelah mendaftar)".
+        type: string
+        required: true
+      - name: pembicara
+        label: Pembicara
+        description: Nama yang sama persis dengan halaman Tim otomatis diberi link ke profilnya.
+        type: string
+        list: true
+      - name: biaya
+        label: Biaya
+        description: Contoh "Rp 250.000" atau "Gratis".
+        type: string
+      - name: daftar
+        label: Link pendaftaran
+        description: Link Google Form, Loket, dan sejenisnya. Kosongkan bila pendaftaran lewat WhatsApp.
+        type: string
+      - name: poster
+        label: Poster
+        description: Satu gambar, tampil di daftar agenda. Ukuran terbaik 1080 x 1350 (format Instagram).
+        type: image
+      - name: tampilkan_poster
+        label: Tampilkan poster di halaman acara
+        description: Matikan bila poster cukup tampil di daftar agenda saja.
+        type: boolean
+        default: true
+      - name: foto
+        label: Foto detail (opsional)
+        description: Boleh lebih dari satu, misalnya materi, tempat, atau dokumentasi. Tampil sebagai slide di halaman acara, setelah poster.
+        type: image
+        options:
+          multiple: true
+      - name: body
+        label: Deskripsi acara
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: artikel
+    label: Publikasi
+    type: collection
+    path: src/content/artikel
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, date, category]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Judul
+        type: string
+        required: true
+      - name: excerpt
+        label: Ringkasan singkat
+        description: Satu atau dua kalimat. Tampil di daftar publikasi dan saat link dibagikan.
+        type: text
+        required: true
+        options:
+          maxlength: 240
+      - name: date
+        label: Tanggal terbit
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: category
+        label: Kategori
+        type: select
+        required: true
+        options:
+          values: [Kontrak, Sengketa, Ketenagakerjaan, Korporasi, Kepatuhan, Pidana, Keluarga, Pertanahan, Umum]
+      - name: author
+        label: Penulis
+        type: string
+        required: true
+      - name: body
+        label: Isi
+        type: rich-text
+        options:
+          format: markdown

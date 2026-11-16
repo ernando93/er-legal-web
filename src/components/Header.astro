@@ -1,7 +1,10 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import { nav, site } from '../data/site';
+import { site } from '../data/site';
+import { menu } from '../data/menu';
+
+const nav = await menu();
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/';

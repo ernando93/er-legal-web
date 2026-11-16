@@ -1,0 +1,60 @@
+---
+// Slider gambar acara. Berganti otomatis tiap 5 detik, berhenti saat disentuh atau disorot.
+// Bisa digeser di HP, tombol panah di laptop. Klik gambar untuk melihat ukuran penuh.
+import Icon from './Icon.astro';
+
+interface Props { gambar: string[]; judul: string; rasio?: number }
+const { gambar, judul, rasio = 4 / 5 } = Astro.props;
+const n = gambar.length;
+---
+<div class="gal" data-gal style={`--gal-ratio: ${rasio.toFixed(4)}`}>
+  <div class="gal-track" tabindex="0" role="region" aria-roledescription="slider" aria-label={`Gambar ${judul}`}>
+    {gambar.map((src, i) => (
+      <figure class="gal-slide">
+        <a href={src} target="_blank" rel="noopener">
+          <img src={src} alt={n > 1 ? `${judul}, gambar ${i + 1} dari ${n}` : judul} loading={i === 0 ? 'eager' : 'lazy'} />
+        </a>
+      </figure>
+    ))}
+  </div>
+  {n > 1 && (
+    <div class="gal-nav">
+      <button class="gal-btn gal-prev" type="button" data-dir="-1" aria-label="Gambar sebelumnya"><Icon name="arrow-right" size={18} /></button>
+      <span class="gal-dots" aria-hidden="true">{gambar.map((_, i) => <span class:list={['gal-dot', { 'is-on': i === 0 }]} />)}</span>
+      <span class="gal-count" aria-live="polite"><span data-cur>1</span> / {n}</span>
+      <button class="gal-btn" type="button" data-dir="1" aria-label="Gambar berikutnya"><Icon name="arrow-right" size={18} /></button>
+    </div>
+  )}
+</div>
+
+<script>
+  const tenang = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-gal]').forEach((gal) => {
+    const track = gal.querySelector<HTMLElement>('.gal-track');
+    const cur = gal.querySelector('[data-cur]');
+    const dots = gal.querySelectorAll('.gal-dot');
+    if (!track || track.children.length < 2) return;
+    const n = track.children.length;
+    const idx = () => Math.round(track.scrollLeft / track.clientWidth);
+    const go = (i: number) => track.scrollTo({ left: ((i + n) % n) * track.clientWidth, behavior: tenang ? 'auto' : 'smooth' });
+    track.addEventListener('scroll', () => requestAnimationFrame(() => {
+      const i = idx();
+      if (cur) cur.textContent = String(i + 1);
+      dots.forEach((d, j) => d.classList.toggle('is-on', j === i));
+    }), { passive: true });
+    gal.querySelectorAll<HTMLButtonElement>('.gal-btn').forEach((b) =>
+      b.addEventListener('click', () => go(idx() + Number(b.dataset.dir))));
+
+    // Ganti otomatis, kecuali pengunjung sedang menyorot, menyentuh, atau memilih gambar.
+    if (tenang) return;
+    let jeda = false;
+    const tahan = () => (jeda = true);
+    const lepas = () => (jeda = false);
+    gal.addEventListener('mouseenter', tahan);
+    gal.addEventListener('mouseleave', lepas);
+    gal.addEventListener('focusin', tahan);
+    gal.addEventListener('focusout', lepas);
+    gal.addEventListener('touchstart', () => { jeda = true; setTimeout(lepas, 8000); }, { passive: true });
+    setInterval(() => { if (!jeda && !document.hidden) go(idx() + 1); }, 5000);
+  });
+</script>
