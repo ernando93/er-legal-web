@@ -14,7 +14,7 @@ const fullTitle = title ? `${judul(title)} | LawOn.id` : 'LawOn.id | Edukasi, Ko
 // Alamat lengkap untuk preview link (WhatsApp, LinkedIn, dan lain-lain).
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL(`${base}/og.png`, Astro.site).href;
+const ogImage = new URL(`${base}/og.png?v=2`, Astro.site).href;
 
 // Data terstruktur untuk mesin pencari (berlaku setelah noindex dihapus).
 const homeUrl = new URL(`${base}/`, Astro.site).href;
@@ -46,8 +46,8 @@ const jsonLd = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#13306b" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="id_ID" />
