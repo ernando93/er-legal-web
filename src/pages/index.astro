@@ -20,22 +20,19 @@ const [utama, ...lain] = artikel;
 const [pendiri, ...anggota] = tim;
 const agenda = (await semuaAcara()).akan.slice(0, 2);
 
-// Tiga kelompok sasaran, sesuai company profile: masyarakat, profesional, dan pelaku usaha.
+// Tiga kelompok sasaran dari company profile. Urutan sesuai permintaan klien: pelaku usaha, profesional, masyarakat.
 const sasaran = [
   {
-    siapa: 'Masyarakat',
-    isi: 'Memahami hak dan kewajiban, serta mendapat arahan awal atas persoalan hukum yang dihadapi.',
-    tautan: [['Konsultasi Langsung dan Daring', 'konsultasi-hukum'], ['Berita Hukum', 'informasi-hukum']],
+    siapa: 'Pelaku usaha',
+    isi: 'Menjaga kegiatan usaha tetap sesuai aturan, dari penyusunan kontrak sampai kepatuhan regulasi.',
   },
   {
     siapa: 'Profesional',
     isi: 'Mengembangkan kompetensi lewat kelas dan pelatihan, serta mengakses referensi hukum yang kredibel.',
-    tautan: [['Kelas Litigasi', 'edukasi-hukum'], ['Pelatihan dan Sertifikasi', 'edukasi-hukum'], ['E-Perpus', 'informasi-hukum']],
   },
   {
-    siapa: 'Pelaku usaha',
-    isi: 'Menjaga kegiatan usaha tetap sesuai aturan, dari penyusunan kontrak sampai kepatuhan regulasi.',
-    tautan: [['Legal Drafting', 'konsultasi-hukum'], ['Legal Due Diligence', 'konsultasi-hukum'], ['Kelas Kepatuhan', 'edukasi-hukum']],
+    siapa: 'Masyarakat',
+    isi: 'Memahami hak dan kewajiban, serta mendapat arahan awal atas persoalan hukum yang dihadapi.',
   },
 ];
 ---
@@ -70,9 +67,6 @@ const sasaran = [
         <li>
           <h3>{s.siapa}</h3>
           <p>{s.isi}</p>
-          <ul class="audience-links">
-            {s.tautan.map(([nama, slug]) => <li><a href={`/layanan/${slug}`}>{nama}</a></li>)}
-          </ul>
         </li>
       ))}
     </ul>

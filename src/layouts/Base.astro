@@ -6,9 +6,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WaFloat from '../components/WaFloat.astro';
 import { site } from '../data/site';
+import { judul } from '../lib/judul';
 
 const { title, description = 'LawOn.id, platform layanan hukum: edukasi, konsultasi, dan informasi hukum dalam satu wadah.' } = Astro.props;
-const fullTitle = title ? `${title} | LawOn.id` : 'LawOn.id | Edukasi, Konsultasi, dan Informasi Hukum';
+const fullTitle = title ? `${judul(title)} | LawOn.id` : 'LawOn.id | Edukasi, Konsultasi, dan Informasi Hukum';
 
 // Alamat lengkap untuk preview link (WhatsApp, LinkedIn, dan lain-lain).
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
